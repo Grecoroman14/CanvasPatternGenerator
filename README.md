@@ -1,5 +1,5 @@
 # CanvasPatternGenerator
-[For fun, got bored with the project and stopped]
+[For fun, got bored with the project and stopped]<br/>
 Generates a variety of downloadable 18" x 24" pattern canvas prints
 
 Get Started:
