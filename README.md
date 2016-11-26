@@ -1,6 +1,7 @@
 # CanvasPatternGenerator
-[For fun, got bored with the project and stopped]<br/>
 Generates a variety of downloadable 18" x 24" pattern canvas prints
+<br/>
+<i>For fun, got bored with the project and stopped working on it</i>
 <br/>
 <h2>Get Started</h2><br/>
 In the command prompt, run: node nodeserver.js
