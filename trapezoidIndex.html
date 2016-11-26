@@ -1,0 +1,171 @@
+<html>
+<head>  
+    <script   src="https://code.jquery.com/jquery-3.1.0.js" 
+       integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="
+       crossorigin="anonymous"></script>
+   
+    <style>
+    h1{
+        text-align:center;
+    }
+
+    /* Width and height is set for 400dpi : 1200px is 3 inches */
+    /* 18 x 24 with 3 inch padding on all sides for canvas */
+
+    canvas{
+        background:#1C2833;
+    }
+
+    .landscape{
+        display:block;
+        margin-top:40px;
+        margin-left:auto;
+        margin-right:auto;
+        width: 12000px; 
+        height: 9600px;
+        border: solid;
+    }
+
+    .innerCut{
+        position:absolute;
+        margin-top:1200px;
+        margin-left:1200px;
+        width: 9600px; 
+        height: 7200px;
+        border: white dotted;
+    }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Inline" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+</head>
+<body>
+    <h1 style="font-family:Bungee Inline"> Circle Art Generator - 18 x 24 inches - plus 3 inch margins for Canvas Prints</h1>
+    <span style="font-family:Montserrat;">.</span>
+
+    <div class="landscape">
+        <div class="innerCut">
+        </div>
+        <canvas width="12000" height="9600">
+    </div>
+
+    <button id="savePhoto" style="text-align:center;font-size:100em;">Save Picture</button>
+ <script>
+
+    $().ready(function(){
+            document.body.style.zoom="35%"
+
+            var canvas = $('canvas');
+            var ctx = canvas[0].getContext("2d");
+            var primaryColor = '#009977';
+            var secondaryColor = '#FDB927';
+            var thirdColor = '#FF0033';
+        
+        function hexToRgb(hex) {
+            // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+            var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+            hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+                return r + r + g + g + b + b;
+            });
+
+            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        function circle(){
+            var primaryColorRGB = hexToRgb(primaryColor);
+            var secondaryColorRGB = hexToRgb(secondaryColor);
+            var thirdColorRGB = hexToRgb(thirdColor);
+
+            for(var i = 0; i < 750; i++){
+                createRandomTrapezoid('rgba('+primaryColorRGB.r  +', ' +primaryColorRGB.g+ ',' + primaryColorRGB.b+ ',' + Math.random() +')')
+            }
+            
+            for(var i = 0; i < 650; i++){ 
+                createRandomTrapezoid('rgba('+secondaryColorRGB.r  +', ' +secondaryColorRGB.g+ ',' + secondaryColorRGB.b+ ',' + Math.random() +')')
+            }
+
+            for(var i = 0; i < 650; i++){ 
+                createRandomTrapezoid('rgba('+thirdColorRGB.r  +', ' +thirdColorRGB.g+ ',' + thirdColorRGB.b+ ',' + Math.random() +')')
+            }
+        }
+
+            function start(){
+                ctx.font = '1000px Bungee Inline';
+                ctx.textAlign = 'center';
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 120;
+                ctx.strokeText("Pittsburgh", 6000,4000);
+                ctx.strokeStyle = 'goldenrod';
+                ctx.lineWidth = 80;
+                ctx.strokeText("Pittsburgh", 6000,4000);
+                ctx.fillStyle = 'white';
+                ctx.fillText("Pittsburgh",6000,4000);
+            }
+
+            function start2(){
+                ctx.font = '700px Montserrat';
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 120;
+                ctx.strokeText("Est. 1758", 6000,6000);
+                ctx.strokeStyle = 'goldenrod';
+                ctx.lineWidth = 80;
+                ctx.strokeText("Est. 1758", 6000,6000);
+                ctx.textAlign = 'center';
+                ctx.fillStyle = 'white';
+                ctx.fillText("Est. 1758",6000,6000);
+            }
+
+
+            function createRandomTrapezoid(color){
+                        var randomX = getRandomInt(0, canvas.width());
+                        var randomY = getRandomInt(0, canvas.height());
+                        var randomHeight = getRandomInt(150, 650);
+                        var randomWidth = getRandomInt(50, 250);
+                        var slant = .8;
+                        
+                        ctx.fillStyle = color;
+                        ctx.beginPath();
+                        ctx.moveTo(randomX, randomY);
+                        ctx.lineTo(randomX + (randomHeight * slant), randomY - (randomHeight));
+                        ctx.lineTo(randomX + (randomHeight * slant) + randomWidth, randomY - (randomHeight));
+                        ctx.lineTo(randomX + randomWidth, randomY);
+                        ctx.lineTo(randomX, randomY);
+                        ctx.closePath();
+                        ctx.fill();
+            }
+
+            setTimeout(function(){
+                circle();
+                // start();
+                // start2(); 
+                setTimeout(function(){
+                    
+                    document.getElementById('savePhoto').addEventListener('click', function() {
+                            canvas[0].toBlob(function(blob){
+                                var a = document.createElement("a");
+                                document.body.appendChild(a);
+                                a.style = "display: none";
+                                var url = window.URL.createObjectURL(blob);
+                                a.href = url;
+                                a.download = 'LA_TEST.png';
+                                a.click();
+                                window.URL.revokeObjectURL(url);
+                            });
+
+                    }, false);
+                    
+                },2000)
+            },500)
+    })
+    
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    </script>
+</body>
+</html>

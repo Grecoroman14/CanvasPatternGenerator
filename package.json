@@ -1,0 +1,16 @@
+{
+  "name": "artgenerator",
+  "version": "1.0.0",
+  "description": "Generators pattern based artwork",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Grecon14@bitbucket.org/Grecon14/artgenerator.git"
+  },
+  "author": "Nicholas Greco",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/Grecon14/artgenerator#readme"
+}

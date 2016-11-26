@@ -1,0 +1,204 @@
+<html>
+<head>  
+    <script   src="https://code.jquery.com/jquery-3.1.0.js" 
+       integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="
+       crossorigin="anonymous"></script>
+   
+    <style>
+    h1{
+        text-align:center;
+    }
+
+    /* Width and height is set for 400dpi : 1200px is 3 inches */
+    /* 18 x 24 with 3 inch padding on all sides for canvas */
+
+    canvas{
+        background-color: #1C2833;
+        background-image: url("https://www.transparenttextures.com/patterns/brushed-alum-dark.png");
+    }
+
+    .landscape{
+        display:block;
+        margin-top:40px;
+        margin-left:auto;
+        margin-right:auto;
+        width: 12000px; 
+        height: 9600px;
+        border: solid;
+        background: blue;
+    }
+
+    .innerCut{
+        position:absolute;
+        margin-top:1200px;
+        margin-left:1200px;
+        width: 9600px; 
+        height: 7200px;
+        border: white dotted;
+        text-align:center;
+    }
+    .text{
+            font-size:1400px;
+            font-family:'Montserrat';
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+            font-weight: 700;
+            
+            color: goldenrod;
+            text-transform: uppercase;
+    
+            -webkit-mask-image: url(http://support.nature.org/images/earth/assets/grit.png);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Inline" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+</head>
+<body>
+    <h1 style="font-family:Bungee Inline"> Circle Art Generator - 18 x 24 inches - plus 3 inch margins for Canvas Prints</h1>
+    <span style="font-family:Montserrat;">.</span>
+
+    <div class="landscape">
+        <div class="innerCut">
+            <!--<div class="text" style="font-size:3300px;padding:-10000px">
+                Pitts
+            </div>
+            <div class="text" style="font-size:2000px;">
+                burgh
+            </div>-->
+        </div>
+        <canvas width="12000" height="9600">
+    </div>
+
+ <script>
+
+    $().ready(function(){
+            document.body.style.zoom="35%"
+
+            var canvas = $('canvas');
+            var ctx = canvas[0].getContext("2d");
+    var imageObj = new Image();
+      imageObj.src = 'https://www.transparenttextures.com/patterns/rocky-wall.png';
+    var imageObj1 = new Image();
+      imageObj1.src = 'https://www.transparenttextures.com/patterns/old-map.png';
+    var imageObj2 = new Image();
+      imageObj2.src = 'https://www.transparenttextures.com/patterns/low-contrast-linen.png';
+            function circle(){
+
+                for(var i = 0; i < 250 ; i++){
+                    var centerX = getRandomInt(0, canvas.width());
+                    var centerY = getRandomInt(0, canvas.height());;
+                    var radius = getRandomInt(50, 550);
+                    var opacity = Math.random();
+
+                    ctx.globalAlpha = 1;
+                    var pattern = ctx.createPattern(imageObj2, 'repeat');
+
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                    ctx.fillStyle = 'rgba(218, 165, 32, '+ opacity +')';
+                    ctx.fill();
+                    ctx.fillStyle = 'rgba(218, 165, 32, '+ opacity +')';
+                    ctx.fill();
+                    ctx.fillStyle = pattern;
+                    ctx.fill();
+                }
+                
+                for(var i = 0; i < 150; i++){ 
+                    var centerX = getRandomInt(0, canvas.width());
+                    var centerY = getRandomInt(0, canvas.height());;
+                    var radius = getRandomInt(50, 550);
+                    var opacity = Math.random();
+
+                    ctx.globalAlpha = 1;
+                    var pattern = ctx.createPattern(imageObj2, 'repeat');
+
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                    ctx.fillStyle = 'rgba(9, 9, 0, '+ opacity +')';
+                    ctx.fill();
+                    ctx.fillStyle = 'rgba(9, 9, 0, '+ opacity +')';
+                    ctx.fill();
+                    ctx.fillStyle = pattern;
+                    ctx.fill();
+                }
+
+                for(var i = 0; i < 150; i++){ 
+                    var centerX = getRandomInt(0, canvas.width());
+                    var centerY = getRandomInt(0, canvas.height());;
+                    var radius = getRandomInt(50, 550);
+                    var opacity = Math.random();
+
+                    ctx.globalAlpha = 1;
+                    var pattern = ctx.createPattern(imageObj2, 'repeat');
+
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                    ctx.fillStyle = 'rgba(255, 255, 255, '+ opacity +')';
+                    ctx.fill();
+                    ctx.fillStyle = 'rgba(255, 255, 255, '+ opacity +')';
+                    ctx.fill();
+                    ctx.fillStyle = pattern;
+                    ctx.fill();
+                    
+                }
+                ctx.lineWidth = 0;
+                ctx.strokeStyle = 'rgba(255, 255, 51, 0.5)';
+                ctx.stroke();
+            }
+            var header = "PITTSBURGH"
+            function start(){
+                ctx.font = '1300px Bungee Inline';
+                ctx.textAlign = 'center';
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 120;
+                ctx.strokeText(header, 6000,4000);
+                ctx.strokeStyle = 'goldenrod';
+                ctx.lineWidth = 80;
+                ctx.strokeText(header, 6000,4000);
+                ctx.fillStyle = 'white';
+                ctx.fillText(header,6000,4000);
+            }
+
+            function start2(){
+                ctx.font = '700px Montserrat';
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 120;
+                ctx.strokeText("Est. 1758", 6000,6000);
+                ctx.strokeStyle = 'goldenrod';
+                ctx.lineWidth = 80;
+                ctx.strokeText("Est. 1758", 6000,6000);
+                ctx.textAlign = 'center';
+                ctx.fillStyle = 'white';
+                ctx.fillText("Est. 1758",6000,6000);
+            }
+            setTimeout(function(){
+                circle();
+                start();
+                start2();
+            },500)
+    })
+    
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    </script>
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script type="text/javascript" charset="utf-8">
+    $(window).load(function(){
+      $().hatchShow();
+    });		
+    jQuery.fn.hatchShow = function(){
+      $('.hsjs').css('display','inner-block').css('white-space','pre').each(function(){
+        var t = $(this);
+        t.wrap("<span class='hatchshow_temp' style='display:block'>");
+        var pw = t.parent().width();
+        while( t.width() < pw ){t.css('font-size', (t.fontSize()+1)+"px"),
+          function(){while( t.width() > pw ){t.css('font-size', (t.fontSize()-.1)+"px")}};
+        };
+      }).css('visibility','visible');
+    };
+    jQuery.fn.fontSize = function(){return parseInt($(this).css('font-size').replace('px',''));};
+
+  </script>
+</body>
+</html>
